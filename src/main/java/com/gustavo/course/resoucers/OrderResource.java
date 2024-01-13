@@ -27,9 +27,6 @@ public class OrderResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	// já que é nescessario passar um id então passamos por aqui também
-	// também precisamos passar um novo @ para a variavel, isso para dizer que o id do 
-	// prametro também vai na url
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Order> findById(@PathVariable Long id) {
 		Order obj = service.findById(id);
