@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.gustavo.course.entities.Category;
 import com.gustavo.course.entities.Order;
 import com.gustavo.course.entities.OrderItem;
+import com.gustavo.course.entities.Payment;
 import com.gustavo.course.entities.Product;
 import com.gustavo.course.entities.User;
 import com.gustavo.course.entities.enums.OrderStatus;
@@ -80,7 +81,19 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		/*
+		  
+		  para salvar um objeto dependente não chamaremos o repositori dele, em vez disso faremos
+		  uma associação de mão dupla em memória
+		  
+		 */
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
 
+		orderRepository.save(o1);
+		
 	}
 
 }
